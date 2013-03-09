@@ -13,17 +13,19 @@ public abstract class AIBase : FsmStateAction {
     protected FsmFloat _hitRecoverTimer;
 
     public override void Awake(){
-        aiComp = Fsm.Owner.GetComponent<PMAIComponent>();
-        pawnComp = Fsm.Owner.GetComponent<AIPawn>();        
-        animComp = pawnComp.animComp;
-        
-        _target = Fsm.GetFsmGameObject("_target");
-        _attackCDTimer = Fsm.GetFsmFloat("_attackCDTimer");
-        _hitRecoverTimer = Fsm.GetFsmFloat("_hitRecoverTimer");
+        if(Fsm.Owner != null){
+            aiComp = Fsm.Owner.GetComponent<PMAIComponent>();
+            pawnComp = Fsm.Owner.GetComponent<AIPawn>();
+            animComp = pawnComp.animComp;
 
-        //if(animComp == null){
-        //    Debug.LogError("Animation component on AI pawn not found!");
-        //}
+            _target = Fsm.GetFsmGameObject("_target");
+            _attackCDTimer = Fsm.GetFsmFloat("_attackCDTimer");
+            _hitRecoverTimer = Fsm.GetFsmFloat("_hitRecoverTimer");
+
+            if(animComp == null){
+                Debug.LogError("Animation component on AI pawn not found!");
+            }
+        }
     }
 
     // Code that runs every frame.
