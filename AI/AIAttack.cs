@@ -37,6 +37,7 @@ public class AIAttack : AIBase
             if(animComp[pawnComp.attackAnim].weight == 0){
                 animComp.CrossFade(pawnComp.idleAnim, 0.1f);
             }
+            Owner.transform.LookAt(_target.Value.transform.position);
         }
     }
 
