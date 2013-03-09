@@ -8,7 +8,7 @@ public class AIHit : AIBase {
     public override void OnEnter() {
         Debug.Log("Hit");
         Fsm.KillDelayedEvents();
-        animComp.Play(pawnComp.hitAnim, PlayMode.StopAll);
+        animComp.Play(pawnComp.hitAnim);
         _hitRecoverTimer.Value = pawnComp.hitCD;
     }
 

@@ -27,7 +27,7 @@ public class AIAttack : AIBase
             }
             else{                
                 Debug.Log("attacking");
-                animComp.Play(pawnComp.attackAnim);//, 0.1f);                
+                animComp.CrossFade(pawnComp.attackAnim, 0.1f);                
 
                 aiComp.SendFsmEventDelayed("attackFrame", pawnComp.attackFrame / 30.0f);
             }

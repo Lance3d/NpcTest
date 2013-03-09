@@ -11,6 +11,7 @@ public class AIPawn : MonoBehaviour {
     public float attackCD;
     public float hitCD;
 
+    public Animation animComp;
     public string walkAnim;
     public string runAnim;
     public string idleAnim;
@@ -23,7 +24,12 @@ public class AIPawn : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        animComp.animation[walkAnim].layer = 1;
+        animComp.animation[runAnim].layer = 1;
+        animComp.animation[idleAnim].layer = 1;
+        animComp.animation[attackAnim].layer = 10;
+        animComp.animation[hitAnim].layer = 10;
+        animComp.animation[dieAnim].layer = 100;
 	}
 	
 	// Update is called once per frame

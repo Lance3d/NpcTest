@@ -12,14 +12,11 @@ public abstract class AIBase : FsmStateAction {
     protected FsmFloat _attackCDTimer;
     protected FsmFloat _hitRecoverTimer;
 
-    public override void Awake(){        
-        GameObject pawnObj = Fsm.GetFsmGameObject("pawnObj").Value;
-        if(pawnObj) {
-            animComp = pawnObj.GetComponent<Animation>();            
-        }
-
+    public override void Awake(){
         aiComp = Fsm.Owner.GetComponent<PMAIComponent>();
         pawnComp = Fsm.Owner.GetComponent<AIPawn>();        
+        animComp = pawnComp.animComp;
+        
         _target = Fsm.GetFsmGameObject("_target");
         _attackCDTimer = Fsm.GetFsmFloat("_attackCDTimer");
         _hitRecoverTimer = Fsm.GetFsmFloat("_hitRecoverTimer");
