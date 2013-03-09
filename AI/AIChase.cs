@@ -14,7 +14,7 @@ public class AIChase : AIBase
 	public override void OnEnter()
 	{
         Debug.Log("Start Chasing");
-        animComp.CrossFade("run", 0.1f);
+        animComp.CrossFade(pawnComp.runAnim, 0.1f);
 
         if(Fsm.EventData.GameObjectData != null){
             _target.Value = Fsm.EventData.GameObjectData;            

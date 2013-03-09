@@ -11,6 +11,15 @@ public class AIPawn : MonoBehaviour {
     public float attackCD;
     public float hitCD;
 
+    public string walkAnim;
+    public string runAnim;
+    public string idleAnim;
+    public string attackAnim;
+    public string hitAnim;
+    public string dieAnim;
+
+    public int attackFrame;
+
 
 	// Use this for initialization
 	void Start () {

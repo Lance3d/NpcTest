@@ -27,15 +27,15 @@ public class AIAttack : AIBase
             }
             else{                
                 Debug.Log("attacking");
-                animComp.Play("attack");//, 0.1f);                
+                animComp.Play(pawnComp.attackAnim);//, 0.1f);                
 
-                aiComp.SendFsmEventDelayed("attackFrame", 0.6f);
+                aiComp.SendFsmEventDelayed("attackFrame", pawnComp.attackFrame / 30.0f);
             }
             _attackCDTimer.Value = pawnComp.attackCD;
         }
         else{
-            if(animComp["attack"].weight == 0){
-                animComp.Play("idle");
+            if(animComp[pawnComp.attackAnim].weight == 0){
+                animComp.CrossFade(pawnComp.idleAnim, 0.1f);
             }
         }
     }

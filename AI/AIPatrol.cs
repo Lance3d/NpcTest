@@ -11,7 +11,7 @@ public class AIPatrol : AIBase
         Debug.Log("start patrol");
         _timer = 2.0f;
 
-        animComp.CrossFade("idle", 0.1f);
+        animComp.CrossFade(pawnComp.idleAnim, 0.1f);
         _target.Value = null;
 	}
 
