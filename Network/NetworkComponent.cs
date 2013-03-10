@@ -1,21 +1,22 @@
 using UnityEngine;
 using System.Collections;
 
-public class AIComponentRemote : MonoBehaviour {
+public class NetworkComponent : MonoBehaviour {
 
     float _initHiddenTimer = 2.0f / 30.0f;
+    AIPawn _pawn;
 
     void Awake(){
+        _pawn = GetComponent<AIPawn>();
+
         if(!Network.isServer) {
             PlayMakerFSM fsm = GetComponent<PlayMakerFSM>();
             if(fsm != null) fsm.enabled = false;
 
             PMAIComponent aiComp = GetComponent<PMAIComponent>();
             if(aiComp != null) aiComp.enabled = false;            
-
-            AIPawn pawn = GetComponent<AIPawn>();
-            Animation anim = pawn.animComp;
-            anim.gameObject.SetActive(false);
+            
+            _pawn.animComp.gameObject.SetActive(false);            
         }
     }
 
@@ -28,13 +29,11 @@ public class AIComponentRemote : MonoBehaviour {
         if(_initHiddenTimer > 0){
             _initHiddenTimer -= Time.deltaTime;
             if(_initHiddenTimer <= 0){
-                if(!Network.isServer){
-                    //NetworkView[] netViews = GetComponents<NetworkView>();
-                    //foreach(NetworkView view in netViews) view.enabled = false;
-
-                    AIPawn pawn = GetComponent<AIPawn>();
-                    pawn.animComp.gameObject.SetActive(true);
-                    MakeDeadPose();
+                if(!Network.isServer){                    
+                    _pawn.animComp.gameObject.SetActive(true);
+                    if(_pawn.IsDead()){
+                        MakeDeadPose();
+                    }                    
                 }
             }
         }
@@ -56,5 +55,16 @@ public class AIComponentRemote : MonoBehaviour {
         anim[pawn.dieAnim].normalizedTime = 1.0f;
         anim[pawn.dieAnim].weight = 1.0f;
         anim.Sample();        
+    }
+
+    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
+        if(stream.isWriting) {
+            //Debug.Log("is writing");                        
+            stream.Serialize(ref _pawn.hp);
+        }        
+        else {
+            //Debug.Log("is receiving");            
+            stream.Serialize(ref _pawn.hp);
+        }
     }
 }
