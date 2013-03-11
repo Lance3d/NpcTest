@@ -5,16 +5,23 @@ public class NetworkComponent : MonoBehaviour {
 
     float _initHiddenTimer = 2.0f / 30.0f;
     AIPawn _pawn;
+    PMAIComponent _aiComp;
+
+    Vector3 _syncedTarget;
+    Quaternion _syncedRotation;
+
+    float _syncTimerCD = 1.0f;
+    float _syncTimer = 0;
 
     void Awake(){
         _pawn = GetComponent<AIPawn>();
+        _aiComp = GetComponent<PMAIComponent>();
 
         if(!Network.isServer) {
             PlayMakerFSM fsm = GetComponent<PlayMakerFSM>();
             if(fsm != null) fsm.enabled = false;
-
-            PMAIComponent aiComp = GetComponent<PMAIComponent>();
-            if(aiComp != null) aiComp.enabled = false;            
+            
+            if(_aiComp != null) _aiComp.enabled = false;            
             
             _pawn.animComp.gameObject.SetActive(false);            
         }
@@ -22,6 +29,8 @@ public class NetworkComponent : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        _syncedTarget = _pawn.currentTarget;
+        _syncedRotation = transform.rotation;
 	}
 	
 	// Update is called once per frame
@@ -37,6 +46,16 @@ public class NetworkComponent : MonoBehaviour {
                 }
             }
         }
+
+        if(_pawn.IsDead()) return;
+
+        _syncTimer -= Time.deltaTime;
+        if(_syncTimer <= 0){
+            _syncedTarget = _pawn.currentTarget;
+            _syncedRotation = transform.rotation;
+
+            _syncTimer = _syncTimerCD;
+        }        
 	}
 
     [RPC]
@@ -59,12 +78,18 @@ public class NetworkComponent : MonoBehaviour {
 
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
         if(stream.isWriting) {
-            //Debug.Log("is writing");                        
+            Debug.Log("is writing:" + _pawn.hp);                        
             stream.Serialize(ref _pawn.hp);
+            stream.Serialize(ref _syncedTarget);
+            stream.Serialize(ref _syncedRotation);
         }        
-        else {
-            //Debug.Log("is receiving");            
+        else {            
             stream.Serialize(ref _pawn.hp);
+            stream.Serialize(ref _syncedTarget);
+            stream.Serialize(ref _syncedRotation);
+            Debug.Log("is receiving:" + _pawn.hp + " " + _syncedTarget);
+            _pawn.currentTarget = _syncedTarget;
+            _pawn.transform.rotation = _syncedRotation;
         }
     }
 }

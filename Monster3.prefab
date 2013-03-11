@@ -1471,7 +1471,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100104}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26cbc09516df3204a8e2362aca6ddfa3, type: 3}
   m_Name: 
@@ -1889,6 +1889,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9506b66697726e0458e2644f45bc55b7, type: 3}
   m_Name: 
+  currentTarget: {x: 0, y: 0, z: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2063,7 +2064,7 @@ NetworkView:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100104}
-  m_Enabled: 1
+  m_Enabled: 0
   m_StateSynchronization: 1
   m_Observed: {fileID: 11400000}
   m_ViewID:

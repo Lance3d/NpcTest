@@ -36,14 +36,11 @@ public class AIChase : AIBase
 
         if(_target.Value != null){
             Vector3 vecToTarget = _target.Value.transform.position - Owner.transform.position;
-            if(vecToTarget.sqrMagnitude < _chaseEndRange * _chaseEndRange) {
+            if(vecToTarget.sqrMagnitude < pawnComp.attackRange * pawnComp.attackRange) {
                 Fsm.Event("targetInRange");
             }
             else{
-                Vector3 targetPos = _target.Value.transform.position;
-                float speed = 4;
-                Owner.GetComponent<CharacterController>().SimpleMove((targetPos - Owner.transform.position).normalized * speed);
-                Owner.transform.LookAt(targetPos);
+                pawnComp.currentTarget = _target.Value.transform.position - vecToTarget.normalized * _chaseEndRange;
             }
         }
 	}
