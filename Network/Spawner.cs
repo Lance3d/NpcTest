@@ -23,12 +23,12 @@ public class Spawner : MonoBehaviour {
 
         if(Network.peerType != NetworkPeerType.Disconnected && !Application.isLoadingLevel) {
             if(GUI.Button(new Rect(refWidth / 2 - 140, refHeight / 2, 240, 60), "Ë¢¹Ö1")) {
-                Vector3 offset = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+                Vector3 offset = new Vector3(Random.Range(-50, 50), 0, Random.Range(-50, 50));
                 Network.Instantiate(prefab1, transform.position + offset, Quaternion.identity, 0);
             }
 
             if(GUI.Button(new Rect(refWidth / 2 + 140, refHeight / 2, 240, 60), "Ë¢¹Ö2")) {
-                Vector3 offset = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+                Vector3 offset = new Vector3(Random.Range(-30, 30), 0, Random.Range(-30, 30));
                 Network.Instantiate(prefab2, transform.position + offset, Quaternion.identity, 0);
             }
         }
