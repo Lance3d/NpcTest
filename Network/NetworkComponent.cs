@@ -7,10 +7,11 @@ public class NetworkComponent : MonoBehaviour {
     AIPawn _pawn;
     PMAIComponent _aiComp;
 
+    bool _isOwner;
     Vector3 _syncedTarget;
     Quaternion _syncedRotation;
 
-    float _syncTimerCD = 1.0f;
+    float _syncTimerCD = 0.0f;
     float _syncTimer = 0;
 
     void Awake(){
@@ -49,13 +50,15 @@ public class NetworkComponent : MonoBehaviour {
 
         if(_pawn.IsDead()) return;
 
-        _syncTimer -= Time.deltaTime;
-        if(_syncTimer <= 0){
-            _syncedTarget = _pawn.currentTarget;
-            _syncedRotation = transform.rotation;
+        if(IsOwner()) {
+            _syncTimer -= Time.deltaTime;
+            if(_syncTimer <= 0) {
+                _syncedTarget = _pawn.currentTarget;
+                _syncedRotation = transform.rotation;
 
-            _syncTimer = _syncTimerCD;
-        }        
+                _syncTimer = _syncTimerCD;
+            }
+        }
 	}
 
     [RPC]
@@ -76,9 +79,18 @@ public class NetworkComponent : MonoBehaviour {
         anim.Sample();        
     }
 
+    bool IsOwner(){
+        return _isOwner;
+    }
+
+    void OnNetworkInstantiate(NetworkMessageInfo info) {
+        if(networkView.isMine) _isOwner = true;
+        else _isOwner = false;        
+    }
+
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) {
         if(stream.isWriting) {
-            Debug.Log("is writing:" + _pawn.hp);                        
+            //Debug.Log("is writing:" + _pawn.hp);                        
             stream.Serialize(ref _pawn.hp);
             stream.Serialize(ref _syncedTarget);
             stream.Serialize(ref _syncedRotation);
@@ -87,7 +99,10 @@ public class NetworkComponent : MonoBehaviour {
             stream.Serialize(ref _pawn.hp);
             stream.Serialize(ref _syncedTarget);
             stream.Serialize(ref _syncedRotation);
-            Debug.Log("is receiving:" + _pawn.hp + " " + _syncedTarget);
+            //Debug.Log("is receiving:" + _pawn.hp + " " + _syncedTarget);
+            if(IsOwner()){
+                Debug.LogError("Owner is receiving!!");
+            }
             _pawn.currentTarget = _syncedTarget;
             _pawn.transform.rotation = _syncedRotation;
         }
