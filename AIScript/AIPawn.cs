@@ -50,7 +50,13 @@ public class AIPawn : MonoBehaviour {
     public void MoveTo(Vector3 target) {
         float speed = 4;
         _Controller.SimpleMove((target - transform.position).normalized * speed);
-        transform.LookAt(target);        
+        FaceTarget(target);
+    }
+
+    public void FaceTarget(Vector3 target){
+        Vector3 tgt = target;
+        tgt.y = transform.position.y;
+        transform.LookAt(tgt);
     }
 
     public bool IsDead(){
