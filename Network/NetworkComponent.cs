@@ -37,7 +37,8 @@ public class NetworkComponent : MonoBehaviour {
         if(_initHiddenTimer > 0 && _isReady){
             _initHiddenTimer -= Time.deltaTime;
             if(_initHiddenTimer <= 0){
-                if(!IsOwner()){                    
+                if(!IsOwner()){
+                    _pawn.enabled = true;
                     _pawn.animComp.gameObject.SetActive(true);
                     if(_pawn.IsDead()){
                         MakeDeadPose();
@@ -131,7 +132,8 @@ public class NetworkComponent : MonoBehaviour {
 
             if(_aiComp != null) _aiComp.enabled = false;
 
-            _pawn.animComp.gameObject.SetActive(false);
+            _pawn.enabled = false;
+            _pawn.animComp.gameObject.SetActive(false);            
 
             // request full update
             networkView.RPC("RPC_RequestFullUpdate", info.sender, Network.player);
