@@ -9,7 +9,9 @@ public class AIDead : AIBase
 	public override void OnEnter()
 	{
         Debug.Log("dead");
-        animComp.Play(pawnComp.dieAnim, PlayMode.StopAll);        
+        animComp.Play(pawnComp.dieAnim, PlayMode.StopAll);
+
+        pawnComp.SendMessage("OnPawnDead");
 	}
 
 	// Code that runs every frame.

@@ -108,6 +108,13 @@ public class NetworkComponent : MonoBehaviour {
         anim.Sample();        
     }
 
+    IEnumerator OnPawnDead(){
+        gameObject.GetComponent<CharacterController>().enabled = false;
+        
+        yield return new WaitForSeconds(5.0f);
+        Network.Destroy(gameObject);
+    }    
+
     bool IsOwner(){
         return _isOwner;
     }
