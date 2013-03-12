@@ -51,19 +51,21 @@ public class ConnectionGUITest : MonoBehaviour {
     }
 
     IEnumerator ConnectionLoop(){
+        ShowUIInfo("正在连接...");
         MasterServer.RequestHostList(gameName);
-        while(!doneTesting){
-            yield return null;
-        }
+        //while(!doneTesting){
+        //    yield return null;
+        //}
+        //Debug.Log("Done Test");
 
-        Debug.Log("Done Test");
-
-        float timer = 1.0f;
+        float timer = 5.0f;
         while(timer >= 0){
             timer -= Time.deltaTime;
             if(MasterServer.PollHostList().Length > 0) break;
             yield return null;
         }
+
+        HideUIInfo();
 
         HostData[] servers = MasterServer.PollHostList();
         if(servers.Length > 0){
@@ -92,13 +94,13 @@ public class ConnectionGUITest : MonoBehaviour {
 
     void OnGUI() {
         GUI.skin.font = gameFont;
-        if(!doneTesting) {            
-            ShowUIInfo("正在连接...");
-            //return;
-        }
-        else{
-            HideUIInfo();
-        }
+        //if(!doneTesting) {            
+        //    ShowUIInfo("正在连接...");
+        //    //return;
+        //}
+        //else{
+        //    HideUIInfo();
+        //}
 
         if(showUIInfo){
             GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 30, 300, 60), uiInfo);

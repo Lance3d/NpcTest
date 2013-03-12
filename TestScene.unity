@@ -158,19 +158,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!1 &786518223
+--- !u!1 &990728473
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 786518227}
-  - 33: {fileID: 786518226}
-  - 65: {fileID: 786518225}
-  - 23: {fileID: 786518224}
-  - 148: {fileID: 786518228}
-  - 114: {fileID: 786518229}
+  - 4: {fileID: 990728479}
+  - 33: {fileID: 990728478}
+  - 65: {fileID: 990728477}
+  - 23: {fileID: 990728476}
+  - 148: {fileID: 990728475}
+  - 114: {fileID: 990728474}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -178,12 +178,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!23 &786518224
+--- !u!114 &990728474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 990728473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26cbc09516df3204a8e2362aca6ddfa3, type: 3}
+  m_Name: 
+  interpolationBackTime: .10000000000000001
+--- !u!148 &990728475
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 990728473}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 990728474}
+  m_ViewID:
+    m_ID: 2
+    m_Type: 1
+--- !u!23 &990728476
 Renderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786518223}
+  m_GameObject: {fileID: 990728473}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -196,59 +219,36 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
---- !u!65 &786518225
+--- !u!65 &990728477
 BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786518223}
+  m_GameObject: {fileID: 990728473}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &786518226
+--- !u!33 &990728478
 MeshFilter:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786518223}
+  m_GameObject: {fileID: 990728473}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &786518227
+--- !u!4 &990728479
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786518223}
+  m_GameObject: {fileID: 990728473}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.58544755, y: 1.12741446, z: 10.1209745}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!148 &786518228
-NetworkView:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786518223}
-  m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 786518229}
-  m_ViewID:
-    m_ID: 1
-    m_Type: 1
---- !u!114 &786518229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 786518223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26cbc09516df3204a8e2362aca6ddfa3, type: 3}
-  m_Name: 
-  interpolationBackTime: .10000000000000001
 --- !u!1 &1670764878
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,8 +338,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1837493372}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -.162983984, y: -.825743735, z: .299552709, w: -.449279249}
+  m_LocalPosition: {x: -15.6247911, y: 15.9285221, z: 12.5311003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -400,7 +400,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1867001413}
-  - 114: {fileID: 1867001414}
+  - 114: {fileID: 1867001415}
   m_Layer: 0
   m_Name: ConnectionGUI
   m_TagString: Untagged
@@ -419,7 +419,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &1867001414
+--- !u!114 &1867001415
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -427,6 +427,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1867001412}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aaa7eab79cb2d246921c0fc28e4960f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4efc590055c5eed4fbc262dadcacaa7d, type: 3}
   m_Name: 
   gameFont: {fileID: 12800000, guid: fa044c52b870ea8459df686dce84ab72, type: 3}
