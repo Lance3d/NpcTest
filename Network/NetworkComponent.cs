@@ -111,6 +111,7 @@ public class NetworkComponent : MonoBehaviour {
 
     IEnumerator OnPawnDead(){
         gameObject.GetComponent<CharacterController>().enabled = false;
+        _pawn.enabled = false;
         
         yield return new WaitForSeconds(5.0f);
         Network.Destroy(gameObject);
